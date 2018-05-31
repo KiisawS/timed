@@ -76,7 +76,6 @@ public class TestController {
     public void testBody2(@RequestBody LogDownLoadDTO downLoadDTO,@RequestParam(required = false) String hello) {
         LOG.info("参数({},{})",downLoadDTO, hello);
         LOG.info("hello.length({})", hello.length());
-
     }
 
     @RequestMapping("/testBody3")
@@ -133,5 +132,6 @@ public class TestController {
         testService.scheduledTest4(size, page);
         return "{\"success\":\"ok\", \"code\":\"200\"}";
     }
+
 }
 

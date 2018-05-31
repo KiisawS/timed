@@ -17,7 +17,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @date 2018/5/25 13:19
  * <p>Company: 杭州传化货嘀科技有限公司</p> 
  */
-@Target({METHOD,TYPE})
+@Target({METHOD})
 @Retention(RUNTIME)
 @Documented
 public @interface Log {
