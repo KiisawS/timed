@@ -1,0 +1,24 @@
+
+file:
+  savePath: /httx/logsDownload/
+  names: ehuodiKA,ehuodiOpenApi
+management:
+  security:
+    enabled: false
+server:
+  port: 8081
+  context-path: /timed
+
+regCenter:
+  serverList: mt-zookeeper-1:2181,mt-zookeeper-2:2181,mt-zookeeper-3:2181
+  namespace: timed.regCenter
+
+testSimpleJob:
+  cron: 0 0/10 * * * ?
+  shardingTotalCount: 2
+  shardingItemParameters: 0=test(无用参数?),1=test(2)
+
+logDownLoadJob:
+  cron: 0 0 8 * * ?
+  shardingTotalCount: 2
+  shardingItemParameters: 0=ehuodiKA,1=ehuodiOpenApi

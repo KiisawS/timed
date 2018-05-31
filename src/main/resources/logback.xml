@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<!-- 应用名称 -->
+	<property name="webappName" value="timed" />
+	<contextName>${webappName}</contextName>
+	<jmxConfigurator />
+	<!-- ============================================================= -->
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>/httx/logs/out.log</file>
+		<append>true</append>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%-5p]%t[%c.%M:%L] - %m%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>trace</level>
+		</filter>
+	</appender>
+	<!-- ============================================================= -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}[%-5level][%thread]%logger.%M:%L - %msg%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>trace</level>
+		</filter>
+	</appender>
+	
+    <!-- ============================================================= -->
+	<!-- debug|error -->
+	<!-- ============================================================= -->
+	<logger name="tf56.timed" level="info" />
+	<!-- 开启远程调用日志打印 -->
+	<logger name="tf56.timed.remote" level="debug"/>
+	<!-- ============================================================= -->
+	<root level="info">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>
+	<!--   <root level="INFO">
+		<appender-ref ref="insertGoodsSourceLogs" />
+		<appender-ref ref="payTradeLogs" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root> -->
+	
+</configuration>
