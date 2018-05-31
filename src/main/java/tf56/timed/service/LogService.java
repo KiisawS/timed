@@ -16,7 +16,6 @@ import tf56.timed.remote.tops.TopsClient;
 import tf56.timed.remote.tops.bean.ContentReq;
 import tf56.timed.remote.tops.bean.ContentResp;
 import tf56.timed.remote.tops.bean.TopsResp;
-import tf56.timed.timer.LogDownLoadTimerTask;
 import tf56.timed.utils.DateUtils;
 import tf56.timed.utils.DirUtils;
 import tf56.timed.utils.DownLoadUtils;
