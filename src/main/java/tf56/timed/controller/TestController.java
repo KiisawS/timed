@@ -128,8 +128,9 @@ public class TestController {
 
     @RequestMapping("/main")
     @Log
-    public String scheduledTest4() {
-        testService.scheduledTest4();
+    public String scheduledTest4(@RequestParam(required = false,defaultValue = "100") Integer size,
+                                 @RequestParam(required = false,defaultValue = "50") Integer page) {
+        testService.scheduledTest4(size, page);
         return "{\"success\":\"ok\", \"code\":\"200\"}";
     }
 }

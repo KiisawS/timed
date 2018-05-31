@@ -100,11 +100,14 @@ public class TestService {
         LOG.info("scheduledThreadPoolExecutor:{}",scheduledThreadPoolExecutor);
     }
 
-
-    public void scheduledTest4() {
+    /**
+     * 周期性执行任务，并终止任务
+     * 每10个数据打印一次，直到打印完数据，终止任务
+     */
+    public void scheduledTest4(final int size,final int page) {
 
         final List<Integer> data = Lists.newArrayList();
-        for (int i = 0; i < 101; i++) {
+        for (int i = 0; i < size; i++) {
             data.add(i);
         }
         final ScheduledThreadPoolExecutor executor = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(1);
@@ -118,9 +121,9 @@ public class TestService {
                     executor.shutdown();
                 } else {
                     int start = param.value;
-                    int end = start+10;
-                    if (end >= data.size()) {
-                        end = data.size();
+                    int end = start + page;
+                    if (end >= size) {
+                        end = size;
                         param.isStop = true;
                     }
                     param.value = end;
