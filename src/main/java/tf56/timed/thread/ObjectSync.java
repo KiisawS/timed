@@ -16,14 +16,14 @@ public class ObjectSync {
 
     private int queueSize = 10;
 
-    public static void main(String []args) {
-        ObjectSync sync = new ObjectSync();
-        Consumer consumer = sync.new Consumer();
-        Producer producer = sync.new Producer();
-
-        producer.start();
-        consumer.start();
-    }
+//    public static void main(String []args) {
+//        ObjectSync sync = new ObjectSync();
+//        Consumer consumer = sync.new Consumer();
+//        Producer producer = sync.new Producer();
+//
+//        producer.start();
+//        consumer.start();
+//    }
 
     class Consumer extends Thread {
 
