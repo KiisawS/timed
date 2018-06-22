@@ -63,6 +63,20 @@ public class SpringJobSchedulerJobConfig extends BaseJobConfig {
         return new SpringJobScheduler(logDownLoadJob, regCenter, getLiteJobConfigurationDataflow(logDownLoadJob.getClass(), cron, shardingTotalCount, shardingItemParameters, logDownLoadJob.isStream()),logDownLoadJobListener);
     }
 
+    @Bean(initMethod = "init",name = "logDueFileDeleteScheduler")
+    public JobScheduler logDueFileDeleteScheduler(final LogDueFileDeleteJob logDueFileDeleteJob,
+                                                  @Value("${logDueFileDeleteJob.cron}") final String cron,
+                                                  @Value("${logDueFileDeleteJob.shardingTotalCount}") int shardingTotalCount,
+                                                  @Value("${logDueFileDeleteJob.shardingItemParameters}") String shardingItemParameters) {
+        JobShardingInfo info = build();
+        if (null != info) {
+            shardingTotalCount = info.getShardingTotalCount();
+            shardingItemParameters = info.getShardingItemParameters();
+        }
+        return new SpringJobScheduler(logDueFileDeleteJob, regCenter, getLiteJobConfigurationSimple(logDueFileDeleteJob.getClass(), cron, shardingTotalCount, shardingItemParameters));
+    }
+
+
     private JobShardingInfo build() {
         List<String> names = fileConfig.getNameList();
         if (null == names || names.isEmpty()) {
