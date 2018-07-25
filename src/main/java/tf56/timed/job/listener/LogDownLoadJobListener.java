@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import tf56.timed.utils.CommandUtils;
+import tf56.timed.utils.SystemUtils;
 
 /***
  * @ClassName LogDownLoadJobListener
@@ -43,7 +44,7 @@ public class LogDownLoadJobListener implements ElasticJobListener{
 
 
     private void deleteFile() {
-        if (StringUtils.startsWithIgnoreCase(System.getProperty("os.name"),"win")) {
+        if (SystemUtils.isWindows()) {
             return;
         }
         //删除无用文件 linux

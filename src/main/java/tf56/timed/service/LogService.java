@@ -4,9 +4,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -16,17 +18,12 @@ import tf56.timed.remote.tops.TopsClient;
 import tf56.timed.remote.tops.bean.ContentReq;
 import tf56.timed.remote.tops.bean.ContentResp;
 import tf56.timed.remote.tops.bean.TopsResp;
-import tf56.timed.utils.DateUtils;
-import tf56.timed.utils.DirUtils;
-import tf56.timed.utils.DownLoadUtils;
+import tf56.timed.utils.*;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /***
@@ -43,6 +40,9 @@ public class LogService {
     private final TopsClient topsClient;
     private final FileConfig fileConfig;
     private final ApplicationContext applicationContext;
+
+    @Value("${dueFile.date}")
+    public String dueDate;
 
     @Autowired
     private ScheduledExecutorService scheduledExecutorService;
@@ -139,4 +139,19 @@ public class LogService {
                 .toString();
     }
 
+    public void deleteDueFile(String name) {
+//        if (SystemUtils.isWindows()) {
+//            return;
+//        }
+
+        String filePath = fileConfig.getSavePath() + name;
+        StringBuilder del = new StringBuilder("rm -rf  ");
+        String date = DateUtils.formatDate(DateUtils.addDays(new Date(), -NumberUtils.toInt(dueDate)), DateUtils.YYYYMMDD);
+        del.append(filePath)
+                .append("/out.log-")
+                .append(date)
+                .append("*");
+        LOG.info("delCmd {}", del.toString());
+        CommandUtils.execLinux(del.toString());
+    }
 }

@@ -24,7 +24,7 @@ public class DownLoadUtils {
 
 
     public static void openDownLoadPage(String name, String time){
-        boolean isWin = StringUtils.startsWithIgnoreCase(System.getProperty("os.name"), "win");
+        boolean isWin = SystemUtils.isWindows();
         String command = command(name, time, isWin);
         LOG.info("command:{}",command);
         String result;

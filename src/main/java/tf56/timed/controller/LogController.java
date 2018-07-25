@@ -1,10 +1,7 @@
 package tf56.timed.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tf56.timed.service.LogService;
 
 /***
@@ -24,5 +21,10 @@ public class LogController {
     @GetMapping("/down")
     public void down(@RequestParam String name, String date) {
         logService.logDownLoad(name, date);
+    }
+
+    @GetMapping("/delete/{name}")
+    public void deleteDueFile(@PathVariable("name") String name) {
+        logService.deleteDueFile(name);
     }
 }

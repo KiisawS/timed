@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import tf56.timed.utils.CommandUtils;
 import tf56.timed.utils.DateUtils;
+import tf56.timed.utils.SystemUtils;
 import tf56.timed.watcher.LogDownLoadDTO;
 import tf56.timed.watcher.event.LogDownLoadEvent;
 
@@ -25,7 +26,7 @@ public class LogDownLoadEventListener implements ApplicationListener<LogDownLoad
     @Async
     @Override
     public void onApplicationEvent(LogDownLoadEvent event) {
-        if (StringUtils.startsWithIgnoreCase(System.getProperty("os.name"),"win")) {
+        if (SystemUtils.isWindows()) {
             return;
         }
         LogDownLoadDTO dto = event.getDto();
