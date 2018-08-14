@@ -1,7 +1,7 @@
 
 file:
   savePath: /httx/logsDownload/
-  names: ehuodiKA,ehuodiOpenApi
+  names: ehuodiKA,ehuodiOpenApi,eCarGo,eCarGoApi
 management:
   security:
     enabled: false
@@ -21,13 +21,13 @@ testSimpleJob:
 
 logDownLoadJob:
   cron: 0 0 8 * * ?
-  shardingTotalCount: 2
-  shardingItemParameters: 0=ehuodiKA,1=ehuodiOpenApi
+  shardingTotalCount: 4
+  shardingItemParameters: 0=ehuodiKA,1=ehuodiOpenApi,2=eCarGo,3=eCarGoApi
 
 logDueFileDeleteJob:
   cron: 0 0 1 * * ?
-  shardingTotalCount: 2
-  shardingItemParameters: 0=ehuodiKA,1=ehuodiOpenApi
+  shardingTotalCount: 4
+  shardingItemParameters: 0=ehuodiKA,1=ehuodiOpenApi,2=eCarGo,3=eCarGoApi
 
 dueFile:
   date: 14
